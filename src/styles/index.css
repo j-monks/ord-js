@@ -1,3 +1,188 @@
 body {
-  background-color: pink;
+  height: 512px;
+  width: 512px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+}
+
+/* #toggleButton {
+  position: absolute;
+  top: 10px;
+  z-index: 2;
+  background-color: #565656;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+} */
+
+.dialog {
+  display: none;
+  position: absolute;
+  top: 256px;
+  left: 256px;
+  transform: translate(-50%, -50%);
+  background-color: #282828;
+  ;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+  /* width: 80%; Adjusted dialog width */
+}
+
+.dialog1 {
+  display: flex;
+  position: absolute;
+  top: 450px;
+  left: 256px;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+  /* width: 80%; Adjusted dialog width */
+}
+
+.dialog2 {
+  display: flex;
+  position: absolute;
+  top: 20px;
+  right: 160px;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+  /* width: 80%; Adjusted dialog width */
+}
+
+.image-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  /* Add some gap between images */
+}
+
+.text-pill {
+  background-color: #565656;
+  /* Or any color that fits your design */
+  color: #fff;
+  padding: 8px 16px;
+  /* border-radius: 30px; */
+  /* Keeps the pill shape */
+  margin: 5px;
+  font-size: 14px;
+  text-align: center;
+  /* Add shadows and effects */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  /* Creates a soft shadow underneath the text pill */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  /* Slight shadow on the text for better readability */
+  transition: all 0.3s ease;
+  /* Smooth transition for hover effects */
+}
+
+.text-pill:hover {
+  background-color: #6d6d6d;
+  /* Slightly lighter or darker on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+  /* Enhanced shadow for a lifted effect */
+  transform: translateY(-2px);
+  /* Slight raise effect on hover */
+}
+
+
+.collection-image {
+  width: 150px;
+  /* Smaller images for dialog */
+  height: 150px;
+  /* Keep the images square */
+  border-radius: 10px;
+  object-fit: cover;
+  /* Ensure images cover the area properly */
+  border: solid #fff;
+}
+
+canvas {
+  border: 2px solid #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  position: relative;
+  display: inline-block;
+  /* Adjust based on your layout */
+}
+
+.number-box {
+  width: 450px;
+  height: 70px;
+  background: white;
+  /* Adjust the background color as needed */
+  border-radius: 20px;
+  /* Adjust for desired roundness */
+  position: relative;
+  /* To position the decorator and number correctly */
+  overflow: hidden;
+  /* Keeps children within the rounded corners */
+  display: flex;
+  /* Enables Flexbox */
+  justify-content: center;
+  /* Horizontally centers the content */
+  align-items: center;
+  /* Vertically centers the content */
+  padding: 10px;
+  /* Adjust padding as needed, but keep in mind it can affect centering */
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.number {
+  font-size: 55px;
+  /* Adjust based on your design */
+  color: black;
+  /* Adjust font color as needed */
+}
+
+.decorator {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  /* Centers the decorator */
+  color: black;
+  /* Adjust the color as needed */
+  font-size: 15px;
+  /* Adjust based on your design */
+}
+
+.multiplier {
+  background: black;
+  color: white;
+  padding: 5px 10px;
+  letter-spacing: 1px;
+  font-size: 14px;
+  /* Adjust based on your design */
+  position: absolute;
+  top: 0;
+  right: 50px;
+  transform: translate(50%, -50%);
+}
+
+.burger-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 40px; /* Width of the burger menu */
+  height: 30px; /* Total height of the burger menu */
+  cursor: pointer;
+}
+
+.burger-bar {
+  height: 5px; /* Height of each bar */
+  background-color: #ffffff; /* Color of the bars */
+  border-radius: 5px; /* Optional: adds rounded corners to the bars */
+  transition: all 0.3s ease; /* Smooth transition for hover or click effects */
 }

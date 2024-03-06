@@ -1,12 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link href="/styles.css" rel="stylesheet" type="text/css" />
-  </head>
-  <body>
-    <img src="/img/1.webp" width="500" height="500" />
-    <img src="/img/logo.png" width="500" />
-    <script src="/main.js" defer></script>
-  </body>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/cbor-js@0.1.0/cbor.js"></script>
+  <meta charset="utf-8" />
+  <link href="/styles.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <!-- <button id="toggleButton">Mining Information</button> -->
+  <img src="img/miner.gif" />
+  <div id="imageDialog" class="dialog">
+    <div class="image-container">
+      <div>
+        <!-- <div class="text-pill">Burial Site</div> -->
+        <img class="collection-image" src="/img/1.webp" alt="Burial Image">
+      </div>
+      <div>
+        <!-- <div class="text-pill">Skeleton Remains</div> -->
+        <img class="collection-image" src="/img/9997.png" alt="Skeleton Image">
+      </div>
+    </div>
+    <div class="text-pill">Inscribed Block Height: X</div>
+    <div class="text-pill">Boost Multiplier: X</div>
+    <div class="text-pill">Runes Mined: X</div>
+  </div>
+  <div class="dialog1">
+    <div class="container">
+      <div class="number-box">
+        <span class="number">1,256,234</span>
+        <span class="decorator">ᛄᚴᛃᛂᛒᛓᛙ</span>
+      </div>
+      <div class="multiplier">6.54x</div>
+    </div>
+  </div>
+  <div class="dialog2">
+    <div id="toggleButton" class="burger-menu">
+      <div class="burger-bar"></div>
+      <div class="burger-bar"></div>
+      <div class="burger-bar"></div>
+    </div>
+  </div>
+  <script src="/main.js" defer></script>
+</body>
+
 </html>
