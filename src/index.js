@@ -1,56 +1,85 @@
 import "./styles/index.css";
 import { Buffer } from 'buffer';
 
-// MOCKING MINER METADATA RESPONSE
-const minerMetadataJSON = {
-  "burialId": "f2c25b1e7a0f3ab4cbbef3f1e48490d0c206fa63b762c725d9126eda5a04a131i0",
-  "boneyId": "9d9309a92a1657ab4822a9e460a73a048fb19ccdb9227d8893312bbc957174b5i0",
-  "multiplier" :"7.4"
+// Constants for Rune calculation
+const runesPerBlock = 5;
+
+// Fetches and processes miner metadata
+async function fetchAndDecodeMetadata() {
+  const response = await fetch("https://ordinals.com/r/metadata/b14b6f3e0478f6e3754879a54c2a49e9fc3ad7c246baac3b2e0b5ed35f31d217i0");
+  const jsonData = await response.json();
+  const metadataBuffer = Buffer.from(jsonData, 'hex');
+  const arrayBuffer = metadataBuffer.buffer.slice(metadataBuffer.byteOffset, metadataBuffer.byteOffset + metadataBuffer.length);
+  return CBOR.decode(arrayBuffer);
 }
-const coded = CBOR.encode(minerMetadataJSON);
-// Function to convert a Uint8Array into a hexadecimal string
-function uint8ArrayToHex(uint8a) {
-  return Array.from(uint8a).map(b => b.toString(16).padStart(2, '0')).join('');
+
+// Calculates total Runes based on block heights and multiplier
+function calculateRunes(currentBlockHeight, inscriptionBlockHeight, boostMultiplier) {
+  const blockChange = currentBlockHeight - inscriptionBlockHeight;
+  const baseRunes = blockChange * runesPerBlock;
+  return baseRunes * boostMultiplier;
 }
 
-const uint8Array = new Uint8Array(coded);
-const mockMetadataResponse = uint8ArrayToHex(uint8Array);
-// MOCKING MINER METADATA RESPONSE
+// Fetches the current blockchain height
+async function getCurrentBlockHeight() {
+  const response = await fetch("https://ordinals.com/r/blockheight");
+  return await response.text();
+}
 
-function draw(t,e){let n=t.getContext("2d"),o=[];var a=0;e.forEach(t=>{let l=new Image;l.src=t,l.onload=()=>{(a+=1)===e.length&&function t(){for(let e=0;e<o.length;e++)n.drawImage(o[e],0,0)}()},o.push(l)})}
+// Function to update runes display
+async function updateRunesDisplay() {
+  try {
+    const minerMetaData = await fetchAndDecodeMetadata();
+    const currentBlockHeight = await getCurrentBlockHeight();
+    const inscriptionBlockHeight = 833627; // Placeholder
+    const miningMultiplier = minerMetaData.miningMultiplier;
 
-const toggleButton = document.getElementById('toggleButton');
-const imageDialog = document.getElementById('imageDialog');
+    const totalRunes = calculateRunes(currentBlockHeight, inscriptionBlockHeight, miningMultiplier);
+    document.getElementById('totalRunesDisplay').innerText = totalRunes.toLocaleString();
+    document.getElementById('dialogMultiplierDisplay').innerText = miningMultiplier + 'x';
+    document.getElementById('counterMultiplierDisplay').innerText = miningMultiplier + 'x';
+  } catch (error) {
+    console.error('Error updating runes:', error);
+  }
+}
 
-toggleButton.addEventListener('click', () => {
+
+// Sets up UI elements and event listeners for the miner
+function setupUI() {
+  const burgerMenu = document.getElementById('burgerMenu');
+  const imageDialog = document.getElementById('imageDialog');
+  const runeCounter = document.getElementById('runeCounter');
+  const closeButton = document.querySelector('.close-button');
+
+  burgerMenu.addEventListener('click', () => {
+    burgerMenu.style.display = 'none';
+    closeButton.style.display = 'flex';
     imageDialog.style.display = imageDialog.style.display === 'none' ? 'block' : 'none';
-});
+    runeCounter.style.display = runeCounter.style.display === 'none' ? 'block' : 'none';
+  });
 
-// Implement your drawing logic here or remove if not needed
-draw(document.getElementById('imageCanvas'), ["img/miner.gif"]);
+  closeButton.addEventListener('click', () => {
+    closeButton.style.display = 'none';
+    burgerMenu.style.display = 'flex';
+    imageDialog.style.display = imageDialog.style.display === 'none' ? 'block' : 'none';
+    runeCounter.style.display = runeCounter.style.display === 'none' ? 'block' : 'none';
+  });
+}
 
-// const h1 = document.createElement("h1");
-// h1.innerText = "Hello, I am some JavaScript in action!";
-// document.body.insertAdjacentElement("afterbegin", h1);
-
+// Fetches and processes miner metadata
 const req = async () => {
-  // Self fetch miner metadata
-  // const res = await fetch(
-  //   "https://ordinals.com/r/metadata/3b0d02048e81b3086fe729b1c32e3b44e28e19dc69bba42f0632b866c5bd6ae0i0"
-  // );
-  // const buffer = Buffer.from(await res.json(), 'hex');
-
-  const buffer = Buffer.from(mockMetadataResponse, 'hex');
-  const arrayBuffer = buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.length);
-  const decoded = CBOR.decode(arrayBuffer);
-
-  // const body = JSON.stringify(decoded, null, 2)
-  // const codeBlock = document.createElement("code");
-  // codeBlock.innerText = body;
-  // document.body.insertAdjacentElement("beforeend", codeBlock);
+  try {
+    await updateRunesDisplay();
+  } catch (error) {
+    console.error('Error during metadata fetch or processing:', error);
+  }
 };
-window.addEventListener("DOMContentLoaded", req);
 
+// Initial setup
+document.addEventListener("DOMContentLoaded", () => {
+  setupUI();
+  req();
 
-
-// need the miner to call out to block height and its own inscription information and metadata
+  // Update the runes display every 10 minutes
+  setInterval(updateRunesDisplay, 600000);
+});

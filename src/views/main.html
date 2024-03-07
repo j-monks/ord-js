@@ -8,38 +8,44 @@
 </head>
 
 <body>
-  <!-- <button id="toggleButton">Mining Information</button> -->
   <img src="img/miner.gif" />
-  <div id="imageDialog" class="dialog">
+  <div id="imageDialog" class="image-dialog-container" style="display: none;">
     <div class="image-container">
       <div>
-        <!-- <div class="text-pill">Burial Site</div> -->
         <img class="collection-image" src="/img/1.webp" alt="Burial Image">
+        <a href="#" class="view-link">View <span class="view-icon">🔗</span></a>
       </div>
+      <p class="plus-sign">+</p>
       <div>
-        <!-- <div class="text-pill">Skeleton Remains</div> -->
         <img class="collection-image" src="/img/9997.png" alt="Skeleton Image">
+        <a href="#" class="view-link">View <span class="view-icon">🔗</span></a>
       </div>
     </div>
-    <div class="text-pill">Inscribed Block Height: X</div>
-    <div class="text-pill">Boost Multiplier: X</div>
-    <div class="text-pill">Runes Mined: X</div>
+    <div class="modal-text">
+      <h2>Started Mining</h2>
+      <p class="info">Block 834059</p>
+      <h2>Multiplier</h2>
+      <span id="dialogMultiplierDisplay" class="info"></span>
+    </div>
   </div>
-  <div class="dialog1">
+  <div id="runeCounter" class="rune-counter-container" style="display: block;">
     <div class="container">
       <div class="number-box">
-        <span class="number">1,256,234</span>
+        <span id="totalRunesDisplay" class="number"></span>
         <span class="decorator">ᛄᚴᛃᛂᛒᛓᛙ</span>
       </div>
-      <div class="multiplier">6.54x</div>
+      <div id="counterMultiplierDisplay" class="multiplier"></div>
     </div>
   </div>
-  <div class="dialog2">
-    <div id="toggleButton" class="burger-menu">
+  <div class="burger-menu-container">
+    <div id="burgerMenu" class="burger-menu">
       <div class="burger-bar"></div>
       <div class="burger-bar"></div>
       <div class="burger-bar"></div>
     </div>
+  </div>
+  <div class="close-button-container">
+    <div class="close-button" style="display: none;">x</div>
   </div>
   <script src="/main.js" defer></script>
 </body>

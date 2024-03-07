@@ -10,100 +10,86 @@ body {
   background-color: #333;
 }
 
-/* #toggleButton {
-  position: absolute;
-  top: 10px;
-  z-index: 2;
-  background-color: #565656;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-} */
-
-.dialog {
-  display: none;
+.image-dialog-container {
   position: absolute;
   top: 256px;
   left: 256px;
+  width: 450px;
+  height: 375px;
   transform: translate(-50%, -50%);
-  background-color: #282828;
-  ;
+  background: rgba(255, 255, 255, 0.8);
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
-  /* width: 80%; Adjusted dialog width */
 }
 
-.dialog1 {
-  display: flex;
+.plus-sign {
+  position: absolute;
+  top: 50px;
+  left: 240px;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.rune-counter-container {
   position: absolute;
   top: 450px;
   left: 256px;
   transform: translate(-50%, -50%);
   border-radius: 15px;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
-  /* width: 80%; Adjusted dialog width */
 }
 
-.dialog2 {
+.burger-menu-container {
   display: flex;
   position: absolute;
-  top: 20px;
-  right: 160px;
+  top: 25px;
+  left: 480px;
   transform: translate(-50%, -50%);
   border-radius: 15px;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
-  /* width: 80%; Adjusted dialog width */
+}
+
+.close-button-container {
+  display: flex;
+  position: absolute;
+  top: 20px;
+  left: 480px;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
 }
 
 .image-container {
   display: flex;
   justify-content: space-around;
   gap: 20px;
-  /* Add some gap between images */
 }
 
 .text-pill {
   background-color: #565656;
-  /* Or any color that fits your design */
   color: #fff;
   padding: 8px 16px;
-  /* border-radius: 30px; */
-  /* Keeps the pill shape */
   margin: 5px;
   font-size: 14px;
   text-align: center;
-  /* Add shadows and effects */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  /* Creates a soft shadow underneath the text pill */
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  /* Slight shadow on the text for better readability */
   transition: all 0.3s ease;
-  /* Smooth transition for hover effects */
 }
 
 .text-pill:hover {
   background-color: #6d6d6d;
-  /* Slightly lighter or darker on hover */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-  /* Enhanced shadow for a lifted effect */
   transform: translateY(-2px);
-  /* Slight raise effect on hover */
 }
 
 
 .collection-image {
   width: 150px;
-  /* Smaller images for dialog */
   height: 150px;
-  /* Keep the images square */
-  border-radius: 10px;
+  border-radius: 50%;
   object-fit: cover;
-  /* Ensure images cover the area properly */
-  border: solid #fff;
 }
 
 canvas {
@@ -114,36 +100,25 @@ canvas {
 .container {
   position: relative;
   display: inline-block;
-  /* Adjust based on your layout */
 }
 
 .number-box {
   width: 450px;
   height: 70px;
   background: white;
-  /* Adjust the background color as needed */
   border-radius: 20px;
-  /* Adjust for desired roundness */
   position: relative;
-  /* To position the decorator and number correctly */
   overflow: hidden;
-  /* Keeps children within the rounded corners */
   display: flex;
-  /* Enables Flexbox */
   justify-content: center;
-  /* Horizontally centers the content */
   align-items: center;
-  /* Vertically centers the content */
   padding: 10px;
-  /* Adjust padding as needed, but keep in mind it can affect centering */
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .number {
   font-size: 55px;
-  /* Adjust based on your design */
   color: black;
-  /* Adjust font color as needed */
 }
 
 .decorator {
@@ -151,11 +126,8 @@ canvas {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  /* Centers the decorator */
   color: black;
-  /* Adjust the color as needed */
   font-size: 15px;
-  /* Adjust based on your design */
 }
 
 .multiplier {
@@ -164,7 +136,6 @@ canvas {
   padding: 5px 10px;
   letter-spacing: 1px;
   font-size: 14px;
-  /* Adjust based on your design */
   position: absolute;
   top: 0;
   right: 50px;
@@ -175,14 +146,78 @@ canvas {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 40px; /* Width of the burger menu */
-  height: 30px; /* Total height of the burger menu */
+  width: 40px;
+  height: 30px;
   cursor: pointer;
 }
 
 .burger-bar {
-  height: 5px; /* Height of each bar */
-  background-color: #ffffff; /* Color of the bars */
-  border-radius: 5px; /* Optional: adds rounded corners to the bars */
-  transition: all 0.3s ease; /* Smooth transition for hover or click effects */
+  height: 5px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.modal-text {
+  font-size: 20px;
+  letter-spacing: 1px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.modal-text h2 {
+  color: #333;
+  margin-bottom: 0px;
+}
+
+.info {
+  letter-spacing: 1px;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.multiplier-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.multiplier-info span {
+  font-size: 24px;
+  color: #333;
+}
+
+.multiplier-value {
+  font-weight: bold;
+}
+
+.view-link {
+  display: block;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 25px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+}
+
+.view-icon {
+  margin-left: 5px; /* Space between 'View' text and icon */
+}
+
+.close-button {
+  color: white; /* 'X' color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 64px;
+  cursor: pointer;
+  opacity: 0.8; /* Makes the background slightly transparent */
+}
+
+.close-button:hover {
+  opacity: 1; /* Fully opaque on hover */
 }
