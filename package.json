@@ -24,6 +24,7 @@
     "webpack-dev-server": "4.15.1"
   },
   "dependencies": {
-    "buffer": "^6.0.3"
+    "buffer": "^6.0.3",
+    "cbor-js": "^0.1.0"
   }
 }

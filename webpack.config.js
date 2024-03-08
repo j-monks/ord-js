@@ -21,7 +21,7 @@ const scriptReplace = Object.entries(script).map(([key, value]) => ({
   replace: `/content/${value}`,
 }));
 const productionDependencies = Object.values(dependencies)
-  .map((id) => `<script src="/content/${id}" ></script>`)
+  .map((id) => `<script src="/content/${id}" type="text/javascript"></script>`)
   .join("");
 const productionExternals = Object.keys(dependencies).reduce((acc, item) => {
   acc[item] = item;

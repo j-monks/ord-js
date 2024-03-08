@@ -1,11 +1,9 @@
 module.exports = {
   dependencies: {
-    lodash: "456i0",
+    "cbor-js":
+      "a9f6a9b050af3de1a4ce714978c1f2231ba731f1f46731a16d0e411f89308566i0",
   },
-  img: {
-    "1.webp": "123i0",
-    "logo.png": "456i0",
-  },
+  img: {},
   styles: {
     "styles.css": "ordi0",
   },
