@@ -2,7 +2,7 @@ import CBOR from "cbor-js";
 import "./styles/index.css";
 
 const runesPerBlock = 5;
-const runesPerHalvingBlock = 500;
+const runesHalvingBlockBonus = 495;
 const halvingBlock = 840000;
 const maxBlock = 890000;
 
@@ -35,14 +35,11 @@ const fetchAndDecodeMetadata = async (inscriptionId) => {
 };
 
 const fetchInscriptionInfo = async (inscriptionId) => {
-  // const response = await fetch(
-  //   `https://ordinals.com/r/inscription/${inscriptionId}`
-  // );
+  const response = await fetch(
+    `https://ordinals.com/r/inscription/${inscriptionId}`
+  );
 
-  // return await response.json();
-  return {
-    height: 833749,
-  };
+  return await response.json();
 };
 
 const calculateRunes = (currentBlockHeight) => {
@@ -51,9 +48,8 @@ const calculateRunes = (currentBlockHeight) => {
     Math.min(currentBlockHeight, maxBlock) - state.inscriptionHeight;
 
   const baseRunes =
-    currentBlockHeight >= halvingBlock
-      ? (blockChange - 1) * runesPerBlock + runesPerHalvingBlock
-      : blockChange * runesPerBlock;
+    blockChange * runesPerBlock +
+    (currentBlockHeight >= halvingBlock ? runesHalvingBlockBonus : 0);
 
   return (baseRunes * state.miningMultiplier).toFixed();
 };
@@ -72,8 +68,13 @@ const updateRunesDisplay = async () => {
 const setupUI = () => {
   const toggleButton = getElementById("toggle");
   const metadataDialog = getElementById("metadata");
-  const runeCounter = getElementById("runes");
 
+  getElementById(
+    "burial-a"
+  ).href = `https://ordinals.com/inscription/${state.burialId}`;
+  getElementById(
+    "boney-a"
+  ).href = `https://ordinals.com/inscription/${state.boneyId}`;
   getElementById(
     "burial"
   ).src = `https://ordinals.com/content/${state.burialId}`;
@@ -83,17 +84,14 @@ const setupUI = () => {
   getElementById("name").innerText = state.name;
 
   const toggleHideClasses = () => {
-    metadataDialog.classList.toggle("hide");
-    runeCounter.classList.toggle("hide");
+    metadataDialog.classList.toggle("slide-up");
   };
   toggleButton.addEventListener("click", toggleHideClasses);
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // const id = window.location.split("/").pop();
-  // It is important the below is not in the final build
-  const id =
-    "b14b6f3e0478f6e3754879a54c2a49e9fc3ad7c246baac3b2e0b5ed35f31d217i0";
+  const id = window.location.split("/").pop();
+
   const [metadata, inscriptionInfo] = await Promise.all([
     fetchAndDecodeMetadata(id),
     fetchInscriptionInfo(id),

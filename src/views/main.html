@@ -11,28 +11,27 @@
         class="bg-img"
         src="https://ordinals.com/content/e819480c27e693055e86c31d2dc7678b7985cdd76efbe761f2d09fa776dc0180i0"
       />
-      <section id="runes" class="runes-mined box flex-center">
-        <h2>Runes Mined</h2>
-        <p id="runeCount"></p>
-      </section>
-      <section id="metadata" class="dialog box flex-center hide">
-        <div class="image-container flex-center">
-          <img id="burial" class="meta-img" src="#" />
-          <h2>+</h2>
-          <img id="boney" class="meta-img" src="#" />
-        </div>
+      <section id="metadata" class="metadata">
+        <header class="meta-header">
+          <div class="img-container">
+            <a id="burial-a" href="#" target="_blank">
+              <img id="burial" class="meta-img" src="#" />
+            </a>
+            <a id="boney-a" href="#" target="_blank">
+              <img id="boney" class="meta-img" src="#" />
+            </a>
+            <span class="multiplier" id="multiplier"></span>
+          </div>
+          <p class="rune-count" id="runeCount"></p>
+        </header>
         <ul class="metadata-list">
           <li class="metadata-list-item">
             <h2>Name</h2>
             <p id="name"></p>
           </li>
           <li class="metadata-list-item">
-            <h2>Start Height</h2>
+            <h2>Started Mining</h2>
             <p id="start-height"></p>
-          </li>
-          <li class="metadata-list-item">
-            <h2>Multiplier</h2>
-            <p id="multiplier"></p>
           </li>
         </ul>
       </section>
