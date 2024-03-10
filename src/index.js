@@ -1,4 +1,3 @@
-import CBOR from "cbor-js";
 import "./styles/index.css";
 
 const runesPerBlock = 5;
