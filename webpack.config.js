@@ -11,24 +11,30 @@ const DEV_MINER_ID =
   "b14b6f3e0478f6e3754879a54c2a49e9fc3ad7c246baac3b2e0b5ed35f31d217i0";
 const DEV_BASE_ENDPOINT = "https://ordinals.com";
 const recursionEndpointReplace = [
-  `${DEV_BASE_ENDPOINT}/r/inscription`,
-  `${DEV_BASE_ENDPOINT}/r/metadata`,
-  `${DEV_BASE_ENDPOINT}/r/blockheight`,
-  `${DEV_BASE_ENDPOINT}/content`,
-].map((endpoint) => ({
-  search: endpoint,
-  replace: "",
-}));
+  {
+    search: new RegExp(`${DEV_BASE_ENDPOINT}/r/inscription`, "g"),
+    replace: "",
+  },
+  { search: new RegExp(`${DEV_BASE_ENDPOINT}/r/metadata`, "g"), replace: "" },
+  {
+    search: new RegExp(`${DEV_BASE_ENDPOINT}/r/blockheight`, "g"),
+    replace: "",
+  },
+  {
+    search: new RegExp(`${DEV_BASE_ENDPOINT}/content`, "g"),
+    replace: "/content",
+  },
+];
 const imgReplace = Object.entries(img).map(([key, value]) => ({
-  search: `/img/${key}`,
+  search: new RegExp(`/img/${key}`, "g"),
   replace: `/content/${value}`,
 }));
 const cssReplace = Object.entries(styles).map(([key, value]) => ({
-  search: `/${key}`,
+  search: new RegExp(`/${key}`, "g"),
   replace: `/content/${value}`,
 }));
 const scriptReplace = Object.entries(script).map(([key, value]) => ({
-  search: `/${key}`,
+  search: new RegExp(`/${key}`, "g"),
   replace: `/content/${value}`,
 }));
 const productionDependencies = Object.values(dependencies)
