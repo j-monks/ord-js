@@ -7,7 +7,16 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 const { img, dependencies, script, styles } = require("./ord.config");
 
-const DEV_BASE_RECURSION_URL = "https://ordinals.com";
+const DEV_BASE_ENDPOINT = "https://ordinals.com";
+const recursionEndpointReplace = [
+  `${DEV_BASE_ENDPOINT}/r/inscription`,
+  `${DEV_BASE_ENDPOINT}/r/metadata`,
+  `${DEV_BASE_ENDPOINT}/r/blockheight`,
+  `${DEV_BASE_ENDPOINT}/content`,
+].map((endpoint) => ({
+  search: endpoint,
+  replace: "",
+}));
 const imgReplace = Object.entries(img).map(([key, value]) => ({
   search: `/img/${key}`,
   replace: `/content/${value}`,
@@ -50,7 +59,7 @@ module.exports = (env, argv) => {
                     ...imgReplace,
                     ...cssReplace,
                     ...scriptReplace,
-                    { search: DEV_BASE_RECURSION_URL, replace: "" },
+                    ...recursionEndpointReplace,
                   ],
                 },
               },
