@@ -7,6 +7,8 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 const { img, dependencies, script, styles } = require("./ord.config");
 
+const DEV_MINER_ID =
+  "b14b6f3e0478f6e3754879a54c2a49e9fc3ad7c246baac3b2e0b5ed35f31d217i0";
 const DEV_BASE_ENDPOINT = "https://ordinals.com";
 const recursionEndpointReplace = [
   `${DEV_BASE_ENDPOINT}/r/inscription`,

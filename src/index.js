@@ -34,15 +34,26 @@ const fetchAndDecodeMetadata = async (inscriptionId) => {
 };
 
 const fetchInscriptionInfo = async (inscriptionId) => {
-  const response = await fetch(
-    `https://ordinals.com/r/inscription/${inscriptionId}`
-  );
+  try {
+    const response = await fetch(
+      `https://ordinals.com/r/inscription/${inscriptionId}`
+    );
 
-  return await response.json();
+    return await response.json();
+  } catch (e) {
+    console.log(e);
+    return {
+      height: 0,
+    };
+  }
 };
 
 const calculateRunes = (currentBlockHeight) => {
-  if (currentBlockHeight === state.inscriptionHeight) return "0";
+  if (
+    currentBlockHeight === state.inscriptionHeight ||
+    state.inscriptionHeight === 0
+  )
+    return "0";
   const blockChange =
     Math.min(currentBlockHeight, maxBlock) - state.inscriptionHeight;
 
@@ -61,7 +72,8 @@ const getCurrentBlockHeight = async () => {
 const updateRunesDisplay = async () => {
   const currentBlockHeight = await getCurrentBlockHeight();
   const totalRunes = calculateRunes(currentBlockHeight);
-  getElementById("runeCount").innerText = totalRunes.toLocaleString();
+  getElementById("runeCount").innerText =
+    totalRunes === "0" ? "Hidden..." : totalRunes;
 };
 
 const setupUI = () => {
@@ -89,7 +101,7 @@ const setupUI = () => {
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const id = window.location.split("/").pop();
+  const id = window.location.pathname.split("/").pop();
 
   const [metadata, inscriptionInfo] = await Promise.all([
     fetchAndDecodeMetadata(id),
