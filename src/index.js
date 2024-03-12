@@ -59,7 +59,10 @@ const calculateRunes = (currentBlockHeight) => {
 
   const baseRunes =
     blockChange * runesPerBlock +
-    (currentBlockHeight >= halvingBlock ? runesHalvingBlockBonus : 0);
+    (state.inscriptionHeight < halvingBlock &&
+    currentBlockHeight >= halvingBlock
+      ? runesHalvingBlockBonus
+      : 0);
 
   return (baseRunes * state.miningMultiplier).toFixed();
 };
@@ -74,6 +77,15 @@ const updateRunesDisplay = async () => {
   const totalRunes = calculateRunes(currentBlockHeight);
   getElementById("runeCount").innerText =
     totalRunes === "0" ? "Hidden..." : totalRunes;
+};
+
+const populateHtml = async () => {
+  const response = await fetch(
+    "https://ordinals.com/content/3523e74b75017b9e6d101e7eb083bda302b674be229359d83229b19a9597238di0"
+  );
+  const html = await response.text();
+
+  document.body.innerHTML = html;
 };
 
 const setupUI = () => {
@@ -106,6 +118,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const [metadata, inscriptionInfo] = await Promise.all([
     fetchAndDecodeMetadata(id),
     fetchInscriptionInfo(id),
+    populateHtml(),
   ]);
 
   setState({
