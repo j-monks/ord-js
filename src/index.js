@@ -85,7 +85,7 @@ const populateHtml = async () => {
   );
   const html = await response.text();
 
-  document.body.innerHTML = html;
+  document.body.insertAdjacentHTML("afterbegin", html);
 };
 
 const setupUI = () => {
