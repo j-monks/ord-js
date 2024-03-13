@@ -87,8 +87,8 @@ p {
 
 .meta {
   position: absolute;
-  bottom: calc(-50% + 80px);
-  height: 50%;
+  bottom: calc(-100% + 160px);
+  height: calc(100% - 80px);
   width: 100%;
   flex-direction: column;
   transition: transform 0.5s ease;
