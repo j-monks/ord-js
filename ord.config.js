@@ -7,6 +7,6 @@ module.exports = {
   },
   script: {
     "main.js":
-      "0448c1e76a749b16f007aa1d077c72f903c080ec90aa0ac5dfc407d6f01f16fdi0",
+      "58025710c2bcc8ff006859aa94254c18f5c424504386449522a666a99559ca6ei0",
   },
 };

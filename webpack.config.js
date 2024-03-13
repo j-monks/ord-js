@@ -8,17 +8,20 @@ const TerserPlugin = require("terser-webpack-plugin");
 const { img, dependencies, script, styles } = require("./ord.config");
 
 const DEV_MINER_ID =
-  "b14b6f3e0478f6e3754879a54c2a49e9fc3ad7c246baac3b2e0b5ed35f31d217i0";
+  "0ab15e6fde1197ef5afdafa0b69c117e2cea74b7c1edc1ba80b7b0993d016b4ai0";
 const DEV_BASE_ENDPOINT = "https://ordinals.com";
 const recursionEndpointReplace = [
   {
     search: new RegExp(`${DEV_BASE_ENDPOINT}/r/inscription`, "g"),
-    replace: "",
+    replace: "/r/inscription",
   },
-  { search: new RegExp(`${DEV_BASE_ENDPOINT}/r/metadata`, "g"), replace: "" },
+  {
+    search: new RegExp(`${DEV_BASE_ENDPOINT}/r/metadata`, "g"),
+    replace: "/r/metadata",
+  },
   {
     search: new RegExp(`${DEV_BASE_ENDPOINT}/r/blockheight`, "g"),
-    replace: "",
+    replace: "/r/blockheight",
   },
   {
     search: new RegExp(`${DEV_BASE_ENDPOINT}/content`, "g"),
