@@ -3,7 +3,7 @@ module.exports = {
   img: {},
   styles: {
     "styles.css":
-      "5f30f739e4e8c364dfb5b3f039bfcde4196065a8859c75072be7fb308fa6cf86i0",
+      "1a6e5dca0c78021028ce039409a0f2f40247798b433548e30afba1c498d6e030i0",
   },
   script: {
     "main.js":
